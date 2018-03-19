@@ -1,7 +1,5 @@
 from   lxml import etree
-import numpy
 import json
-import math
 
 tree  = etree.parse(open('map.osm', 'rb'))
 query_node  = etree.XPath("/osm/node")
@@ -69,7 +67,7 @@ for i in range(0, N):
 pattern_str += "\n"
 
 for i in range(0, N):
-    if i % 100 == 0: print(f"Вывод строк матрицы {i} из {N}")
+    print(f"Вывод строк матрицы {i} из {N}")
     line = pattern_str
     for j in AdjDict[i]:
         line = line[0:2*j] + "1," + line[2*j+2:]

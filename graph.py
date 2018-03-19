@@ -1,7 +1,5 @@
 from   lxml import etree
-import numpy
 import json
-import math
 
 tree  = etree.parse(open('map.osm', 'rb'))
 query_node  = etree.XPath("/osm/node")
