@@ -1,5 +1,6 @@
 from   lxml import etree
 import json
+import pickle
 
 tree  = etree.parse(open('map.osm', 'rb'))
 query_node  = etree.XPath("/osm/node")
@@ -123,4 +124,21 @@ mapSvg.write(
 """
 )       
 mapSvg.close()
+
+print("Сериализация данных для interface.py")
+points_graph = list()
+for p_xml in points_road:
+    p = {
+        'osm_id' : p_xml.attrib['id'],
+        'osm_uid': p_xml.attrib['uid'],
+        'lon':     float(p_xml.attrib['lon']),
+        'lat':     float(p_xml.attrib['lat'])
+    }
+    points_graph.append(p)
+
+graph = (points_graph, AdjDict)
+
+dumpFile = open('./result/graph.pickle', 'wb')
+pickle.dump(graph, dumpFile)
+
 print("Готово!")
